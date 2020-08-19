@@ -1,37 +1,48 @@
- const express = require('express');
+const express = require('express');
 
- const app = express();
+const app = express();
 
- app.get('/projects', (request, response) => {
-    return response.json([
-       'Project 1',
-       'Project 2'
-    ]);
- });
+app.use(express.json());
 
- app.post('/projects', (request, response) => {
-    return response.json([
+app.get('/projects', (request, response) => {
+   const { title, owner } = request.query;
+   console.log(title, owner);
+
+   return response.json([
+      'Project 1',
+      'Project 2'
+   ]);
+});
+
+app.post('/projects', (request, response) => {
+   const { aplication, owner } = request.body;
+   console.log(aplication, owner);
+
+   return response.json([
       'Project 1',
       'Project 2',
       'Project 3'
-    ]);
- });
+   ]);
+});
 
- app.put('/projects/:id', (request, response) => {
-    return response.json([
+app.put('/projects/:id', (request, response) => {
+   const { id } = request.params;
+   console.log(id);
+
+   return response.json([
       'Project 4',
       'Project 2',
       'Project 3'
-    ]);
- });
+   ]);
+});
 
- app.delete('/projects/:id', (request, response) => {
+app.delete('/projects/:id', (request, response) => {
    return response.json([
       'Project 2',
       'Project 3'
    ]);
- });
+});
 
- app.listen(3333, () => {
-    console.log("🚀back-end started!")
- });
+app.listen(3333, () => {
+   console.log("🚀back-end started!")
+});
