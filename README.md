@@ -10,6 +10,4 @@
 
 ## :rocket: Sobre o modulo
 
-Nesse modulo estamos explorando os conceitos do Nodejs, ReactJs, React Native e TypeScript
-
-Conhecemos mais a fundo como funciona a arquitetura das tecnologia e como utilizá las
+Nesse modulo estamos explorando os conceitos do Nodejs, ReactJs, React Native e TypeScript, também conhecemos mais a fundo como funciona a arquitetura das tecnologia e como utilizá las
