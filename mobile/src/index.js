@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, Text, StyleSheet, StatusBar, FlatList } from 'react-native';
+import { SafeAreaView, Text, StyleSheet, StatusBar, FlatList, TouchableOpacity } from 'react-native';
 
 import api from './services/api';
 
@@ -11,6 +11,17 @@ export default function App() {
       setProjects(response.data);
     });
   }, []);
+
+  async function handleAddProject() {
+    const result = await api.post('projects', {
+      title: `Novo projeto ${Date.now()}`,
+      owner: 'Gabriel Nogueira',
+    });
+
+    const project = result.data;
+
+    setProjects([...projects, project]);
+  }
 
   return (
     <>
@@ -24,8 +35,15 @@ export default function App() {
             <Text style={styles.project}>{project.title}</Text>
           )}
         />
-      </SafeAreaView>
 
+        <TouchableOpacity 
+          style={styles.button}
+          activeOpacity={0.6}
+          onPress={handleAddProject}
+        >
+          <Text style={styles.buttonText}>Adicionar projeto</Text>
+        </TouchableOpacity>
+      </SafeAreaView>
     </>
   );
 }
@@ -34,9 +52,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#7159c1',
+    paddingHorizontal: 10,
   },
   project: {
     color: '#fff',
     fontSize: 20,
   },
+  button: {
+    backgroundColor: '#FFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 50,
+    margin: 20,
+    borderRadius: 4,
+  },
+  buttonText: {
+    color: '#333',
+    fontSize: 20,
+    fontWeight: 'bold'
+  }
 });
